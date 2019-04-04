@@ -4,7 +4,7 @@
     // Update 'version' if you need to refresh the cache
     var version = '{version}';
     var offlineUrl = "{offlineRoute}";
-
+    
     // Store core files in a cache (including a page to display when offline)
     function updateStaticCache() {
         return caches.open(version)
@@ -53,6 +53,9 @@
                 })
         );
     });
+
+    importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.1.1/workbox-sw.js');
+    workbox.googleAnalytics.initialize({parameterOverrides: {cd1: 'offline'}});
 
     self.addEventListener('fetch', function (event) {
         var request = event.request;
